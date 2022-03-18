@@ -3,6 +3,12 @@
     <h2>0</h2>
     padaryti kad spaudzian mygtuka didinam 0 vienetu
 */
+const btnEl = document.getElementById('btn1');
+const h2El = btnEl.nextElementSibling;
+let total = 0;
+btnEl.onclick = () => {
+  h2El.textContent = ++total;
+};
 
 /* 2
 <form>
