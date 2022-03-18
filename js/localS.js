@@ -5,11 +5,14 @@
 */
 const btnEl = document.getElementById('btn1');
 const h2El = btnEl.nextElementSibling;
+let total = localStorage.getItem('total') === null ? 0 : localStorage.getItem('total');
 // is storage
-let total = 0;
+
+h2El.innerText = total;
 btnEl.onclick = () => {
   h2El.textContent = ++total;
   // i storage
+  localStorage.setItem('total', total);
 };
 
 /* 2
@@ -35,6 +38,20 @@ formEl.onsubmit = function (e) {
   inpEl.value = '';
 };
 
+const namesArr = localStorage.getItem('names') === null ? [] : localStorage.getItem('names').split(',');
+
+namesArr.forEach((name) => makeLi(name));
+
+function makeLi(stringName) {
+  // create li
+  const liEl = document.createElement('li');
+  // add text
+  liEl.textContent = stringName;
+  // place el
+  ulEl.append(liEl);
+  // add to array
+}
+
 function addLi(stringName) {
   // create li
   const liEl = document.createElement('li');
@@ -42,4 +59,12 @@ function addLi(stringName) {
   liEl.textContent = stringName;
   // place el
   ulEl.append(liEl);
+  // add to array
+  namesArr.push(stringName);
+  saveToStorage();
+}
+
+function saveToStorage() {
+  const stringFromArr = namesArr.join(',');
+  localStorage.setItem('names', stringFromArr);
 }
